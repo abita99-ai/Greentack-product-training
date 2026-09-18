@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>나의 첫번째 아이디어 실현</title>
     <style>
         body {
-            background-color: black; /* 배경화면 검정색 */
-            color: white; /* 폰트 컬러 흰색 */
-            font-family: 'Malgun Gothic', sans-serif; /* 깔끔한 폰트 적용 */
+            background-color: black;
+            /* 배경화면 검정색 */
+            color: white;
+            /* 폰트 컬러 흰색 */
+            font-family: 'Malgun Gothic', sans-serif;
+            /* 깔끔한 폰트 적용 */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -16,16 +20,127 @@
             height: 100vh;
             margin: 0;
         }
+
         h1 {
+            font-size: 40px;
+            color: #38bdf8;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
             margin-bottom: 20px;
         }
+
         p {
             font-size: 1.2em;
         }
+
+        .view-btn {
+            margin-top: 24px;
+            padding: 12px 32px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #ffffff;
+            background: linear-gradient(135deg, #4f46e5, #06b6d4);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .view-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.6);
+        }
+
+        .view-btn:active {
+            transform: translateY(0);
+        }
+
+        .content-view {
+            margin-top: 28px;
+            padding: 20px 36px;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-radius: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: -0.2px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 옵시디언 스타일 액자 톤 컬러스티커 테마 */
+        .theme-obsidian-purple {
+            background: rgba(127, 109, 242, 0.12);
+            border-color: #7f6df2;
+            color: #d8b4fe;
+            box-shadow: 0 8px 25px rgba(127, 109, 242, 0.35), inset 0 0 15px rgba(127, 109, 242, 0.15);
+        }
+
+        .theme-obsidian-emerald {
+            background: rgba(46, 196, 182, 0.12);
+            border-color: #2ec4b6;
+            color: #99f6e4;
+            box-shadow: 0 8px 25px rgba(46, 196, 182, 0.35), inset 0 0 15px rgba(46, 196, 182, 0.15);
+        }
+
+        .theme-obsidian-amber {
+            background: rgba(255, 183, 3, 0.12);
+            border-color: #ffb703;
+            color: #fef08a;
+            box-shadow: 0 8px 25px rgba(255, 183, 3, 0.35), inset 0 0 15px rgba(255, 183, 3, 0.15);
+        }
+
+        .theme-obsidian-rose {
+            background: rgba(244, 114, 182, 0.12);
+            border-color: #f472b6;
+            color: #fbcfe8;
+            box-shadow: 0 8px 25px rgba(244, 114, 182, 0.35), inset 0 0 15px rgba(244, 114, 182, 0.15);
+        }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
+
 <body>
-    <h1>나의 첫번째 아이디어 실현</h1>
+    <h1>오늘도 힘내세요!</h1>
     <p>여기에 멋진 아이디어의 내용을 채워보세요!</p>
+    <button id="view-btn" class="view-btn">View</button>
+    <div id="content-view" class="content-view hidden">
+        ✨ 당신의 무한한 아이디어를 실현할 준비가 되었습니다!
+    </div>
+
+    <script>
+        const items = [
+            { text: "✨ 오늘도 해냈어요!", theme: "theme-obsidian-purple" },
+            { text: "✨ 조금씩 나아지고 있어요~", theme: "theme-obsidian-emerald" },
+            { text: "✨ 이대로 쭉 가봅시다~", theme: "theme-obsidian-amber" },
+            { text: "✨ 브라보 유어 데이", theme: "theme-obsidian-rose" }
+        ];
+        let currentIndex = 0;
+
+        const viewBtn = document.getElementById('view-btn');
+        const contentView = document.getElementById('content-view');
+
+        viewBtn.addEventListener('click', () => {
+            contentView.classList.remove('hidden');
+
+            contentView.style.opacity = '0';
+            contentView.style.transform = 'translateY(8px) scale(0.98)';
+
+            setTimeout(() => {
+                const current = items[currentIndex];
+                contentView.textContent = current.text;
+                contentView.className = 'content-view ' + current.theme;
+                contentView.style.opacity = '1';
+                contentView.style.transform = 'translateY(0) scale(1)';
+
+                currentIndex = (currentIndex + 1) % items.length;
+                viewBtn.textContent = 'Next View';
+            }, 180);
+        });
+    </script>
 </body>
+
 </html>
